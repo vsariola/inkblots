@@ -10,6 +10,7 @@ python = ">=3.6,<3.11"
 python-rtmidi = "^1.4.9"
 imgui = {git = "https://github.com/pyimgui/pyimgui.git", branch = "dev/version-2.0", extras = ["glfw"]}
 ptimer = "^0.1.1"
+dataclasses-json = "^0.5.7"
 
 
 [tool.poetry.group.dev.dependencies]

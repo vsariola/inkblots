@@ -13,13 +13,7 @@ def main():
     window = impl_glfw_init()
     impl = GlfwRenderer(window)
 
-    t = None
-    try:
-        with open("song.json", "r") as infile:
-            t = json.load(infile)
-    except:
-        t = tracker.Tracker()
-    with t:
+    with tracker.Tracker("autosave.json") as t:
         while not glfw.window_should_close(window):
             glfw.poll_events()
             impl.process_inputs()
@@ -43,8 +37,6 @@ def main():
             imgui.render()
             impl.render(imgui.get_draw_data())
             glfw.swap_buffers(window)
-        with open("song.json", "w") as outfile:
-            json.dump(t, outfile, default=vars)
 
     impl.shutdown()
     glfw.terminate()

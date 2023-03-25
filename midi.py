@@ -21,6 +21,10 @@ class Midi():
         msg = [0x90 + channel, note, velocity]
         self.midiout.send_message(msg)
 
-    def all_notes_off(self, channel):
+    def channel_notes_off(self, channel):
         msg = [0xB0 + channel, 0x7B, 0]
         self.midiout.send_message(msg)
+
+    def all_notes_off(self):
+        for i in range(16):
+            self.channel_notes_off(i)
