@@ -5,6 +5,7 @@ import OpenGL.GL as gl
 from random import randint
 import midi
 import tracker
+import json
 
 
 def main():
@@ -12,7 +13,13 @@ def main():
     window = impl_glfw_init()
     impl = GlfwRenderer(window)
 
-    with tracker.Tracker() as t:
+    t = None
+    try:
+        with open("song.json", "r") as infile:
+            t = json.load(infile)
+    except:
+        t = tracker.Tracker()
+    with t:
         while not glfw.window_should_close(window):
             glfw.poll_events()
             impl.process_inputs()
@@ -36,6 +43,8 @@ def main():
             imgui.render()
             impl.render(imgui.get_draw_data())
             glfw.swap_buffers(window)
+        with open("song.json", "w") as outfile:
+            json.dump(t, outfile, default=vars)
 
     impl.shutdown()
     glfw.terminate()
@@ -43,7 +52,7 @@ def main():
 
 def impl_glfw_init():
     width, height = 1280, 720
-    window_name = "minimal ImGui/GLFW3 example"
+    window_name = "Tiny MIDI Tracker for DOS"
 
     if not glfw.init():
         print("Could not initialize OpenGL context")

@@ -39,16 +39,18 @@ class GridEditor:
         for y in range(rows):
             for x in range(cols):
                 imgui.push_id(f"{x}_{y}")
+                color = None
                 if x == self.x and y == self.y:
                     if imgui.is_window_focused():
                         t = time.time()
-                        imgui.push_style_color(imgui.COLOR_BUTTON, math.sin(t)**2, math.sin(t+2)**2, math.sin(t+4)**2)
+                        color = (math.sin(t)**2, math.sin(t+2)**2, math.sin(t+4)**2)
                     else:
-                        imgui.push_style_color(imgui.COLOR_BUTTON, .3, .3, .3)
+                        color = (.3, .3, .3)
                 elif coloring is not None:
-                    imgui.push_style_color(imgui.COLOR_BUTTON, *coloring(x, y))
-                else:
-                    imgui.push_style_color(imgui.COLOR_BUTTON, .1, .1, .1)
+                    color = coloring(x, y)
+                if color is None:
+                    color = (.1, .1, .1)
+                imgui.push_style_color(imgui.COLOR_BUTTON, color[0], color[1], color[2])
                 if imgui.button(f"{data[x][y] if data[x][y] is not None else '-'}##{x}_{y}"):
                     self.x = x
                     self.y = y
