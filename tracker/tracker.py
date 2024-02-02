@@ -5,7 +5,6 @@ import imgui
 import midi
 import widgets
 import math
-import json
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json, DataClassJsonMixin
 
@@ -69,7 +68,7 @@ class Tracker:
     def __enter__(self):
         self.midi.__enter__()
         for i in range(NUM_CHANNELS):
-            self.midi.set_instrument(i+9, self.song.channels[i].instrument)
+            self.midi.set_instrument(i + 9, self.song.channels[i].instrument)
         return self
 
     def __exit__(self, type, value, traceback):
@@ -118,7 +117,7 @@ class Tracker:
         changed, chn.instrument = imgui.input_int(f"###instrument_{i}", chn.instrument)
         chn.instrument = min(max(chn.instrument, 0), 255)
         if changed:
-            self.midi.set_instrument(i+9, chn.instrument)
+            self.midi.set_instrument(i + 9, chn.instrument)
         changed, chn.octave = imgui.input_int(f"###octave_{i}", chn.octave)
         chn.octave = min(max(chn.octave, 0), 8)
         changed, chn.duration = imgui.input_int(f"###chnduration_{i}", chn.duration)
@@ -220,7 +219,7 @@ class Tracker:
 
     def pattern_play_column(self, chnindex):
         try:
-            return self.song.order_list[chnindex+1][self.order_list_play_row]
+            return self.song.order_list[chnindex + 1][self.order_list_play_row]
         except:
             return None
 
@@ -243,17 +242,17 @@ class Tracker:
                     n = self.pattern_play_value(i)
                     # self.midi.all_notes_off(i)
                     if n is not None:
-                        self.midi.channel_notes_off(i+9)
+                        self.midi.channel_notes_off(i + 9)
                         if i > 0:
                             n = (n + self.song.mode + self.chord_play_value) * 12 // 7
                             n += 12 * self.song.channels[i].octave
                         else:
                             n += 25
-                        self.midi.note_on(i+9, n, self.song.channels[i].volume)
+                        self.midi.note_on(i + 9, n, self.song.channels[i].volume)
             except:
                 continue
         self.t += 1
 
 
 def channel_color(i):
-    return (math.sin(i)*.5+.5, math.sin(i+2)*.5+.5, math.sin(i+4)*.5+.5)
+    return (math.sin(i) * .5 + .5, math.sin(i + 2) * .5 + .5, math.sin(i + 4) * .5 + .5)

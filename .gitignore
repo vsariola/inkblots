@@ -1,3 +1,7 @@
+# project specific
+old/
+*.com
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -132,4 +136,3 @@ dmypy.json
 *.com
 .vscode/
 imgui.ini
-autosave.json

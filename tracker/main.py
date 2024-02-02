@@ -3,9 +3,7 @@ from imgui.integrations.glfw import GlfwRenderer
 import imgui
 import OpenGL.GL as gl
 from random import randint
-import midi
 import tracker
-import json
 
 
 def main():
