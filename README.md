@@ -21,7 +21,7 @@ p01, nesbox, okkie, exoticorn, baze, Virgill, byteobserver, ferris, Ped7g,
 Dresdenboy, aldroid, hannu, wrighter, dave84, havoc, unlord, noby, LJ, PoroCYon,
 sensenstahl, Blossom, deater, ilmenit, Fready, Jin X, gasman, DevEd, bitl,
 wbcbz7, teadrinker, Pellicus, GoingDigital, las, mentor, iq, blueberry, fizzer,
-gargaj, pOWL, silvia, MartiniMoe, NR
+gargaj, pOWL, silvia, MartiniMoe, NR4!
 
 ## Building
 
